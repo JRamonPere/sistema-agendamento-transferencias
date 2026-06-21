@@ -42,4 +42,17 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErroResponse> handleBusinessException(BusinessException exception) {
+
+        ErroResponse erro = new ErroResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Regra de negócio",
+                exception.getMessage()
+        );
+
+        return ResponseEntity.badRequest().body(erro);
+    }
 }

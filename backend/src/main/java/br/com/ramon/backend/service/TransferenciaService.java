@@ -2,6 +2,7 @@ package br.com.ramon.backend.service;
 
 import br.com.ramon.backend.dto.TransferenciaRequest;
 import br.com.ramon.backend.exception.TaxaNaoAplicavelException;
+import br.com.ramon.backend.exception.BusinessException;
 import br.com.ramon.backend.model.Transferencia;
 import br.com.ramon.backend.repository.TransferenciaRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,12 @@ public class TransferenciaService {
         if (dias < 0) {
             throw new TaxaNaoAplicavelException(
                     "A data da transferência não pode ser anterior à data de agendamento."
+            );
+        }
+
+        if (request.getContaOrigem().equals(request.getContaDestino())) {
+            throw new BusinessException(
+                    "A conta de origem deve ser diferente da conta de destino."
             );
         }
 
