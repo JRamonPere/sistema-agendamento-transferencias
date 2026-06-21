@@ -1,0 +1,36 @@
+<section class="card">
+    <h2>Extrato de Transferências</h2>
+    <table *ngIf="transferencias.length > 0">
+        <thead>
+        <tr>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Valor</th>
+            <th>Taxa</th>
+            <th>Transferência</th>
+            <th>Agendamento</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let transferencia of transferencias">
+            <td>{{ transferencia.contaOrigem }}</td>
+
+            <td>{{ transferencia.contaDestino }}</td>
+
+            <td>{{ transferencia.valorTransferencia | currency:'BRL' }}</td>
+
+            <td>{{ transferencia.taxa | currency:'BRL' }}</td>
+
+            <td>{{ transferencia.dataTransferencia }}</td>
+
+            <td>{{ transferencia.dataAgendamento }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p *ngIf="transferencias.length === 0">
+        Nenhuma transferência encontrada.
+    </p>
+
+</section>
